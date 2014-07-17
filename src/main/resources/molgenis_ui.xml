@@ -2,9 +2,8 @@
 <molgenis label="ASE" name="ase">
 	<menu label="Home" name="main">
 		<plugin id="home" name="Home" url="home"/>
-		<plugin id="ase" name="ASE" url="dataexplorer?dataset=ase"/>
-        <plugin id="samples" name="Samples" url="dataexplorer?dataset=samples"/>
-        <plugin id="tissue" name="Tissue Expression" url="dataexplorer?dataset=tissueexpression"/>
+		<plugin id="ase" name="ASE" url="dataexplorer?dataset=ASE"/>
+        <plugin id="samples" name="Samples" url="dataexplorer?dataset=Samples"/>
         <menu label="Import" name ="import">
 			<plugin id="importwizard" name="Import" url="importwizard"/>
 			<plugin id="vcfimporter" name="VCF" url="vcfimporter"/>
