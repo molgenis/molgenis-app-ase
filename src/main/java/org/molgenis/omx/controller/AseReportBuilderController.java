@@ -24,7 +24,7 @@ import au.com.bytecode.opencsv.CSVWriter;
 @Controller
 public class AseReportBuilderController extends MolgenisPluginController
 {
-	private static final String URI = "/plugin/reportbuilder/csv";
+	private static final String URI = "/plugin/dataexplorer/details/csv";
 
 	public AseReportBuilderController()
 	{

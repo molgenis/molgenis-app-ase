@@ -155,11 +155,6 @@ public class WebAppDatabasePopulatorServiceImpl implements WebAppDatabasePopulat
         anonymousSamplesAuthority.setRole(SecurityUtils.AUTHORITY_PLUGIN_WRITE_PREFIX + "Samples".toUpperCase());
         dataService.add(UserAuthority.ENTITY_NAME, anonymousSamplesAuthority);
 
-        UserAuthority anonymousTissueAuthority = new UserAuthority();
-        anonymousTissueAuthority.setMolgenisUser(anonymousUser);
-        anonymousTissueAuthority.setRole(SecurityUtils.AUTHORITY_PLUGIN_WRITE_PREFIX + "Tissue".toUpperCase());
-        dataService.add(UserAuthority.ENTITY_NAME, anonymousTissueAuthority);
-
         UserAuthority anonymousAseEntityAuthority = new UserAuthority();
         anonymousAseEntityAuthority.setMolgenisUser(anonymousUser);
         anonymousAseEntityAuthority.setRole(SecurityUtils.AUTHORITY_ENTITY_READ_PREFIX + "ase".toUpperCase());
@@ -169,11 +164,6 @@ public class WebAppDatabasePopulatorServiceImpl implements WebAppDatabasePopulat
         anonymousSamplesEntityAuthority.setMolgenisUser(anonymousUser);
         anonymousSamplesEntityAuthority.setRole(SecurityUtils.AUTHORITY_ENTITY_READ_PREFIX + "samples".toUpperCase());
         dataService.add(UserAuthority.ENTITY_NAME, anonymousSamplesEntityAuthority);
-
-        UserAuthority anonymousTissueEntityAuthority = new UserAuthority();
-        anonymousTissueEntityAuthority.setMolgenisUser(anonymousUser);
-        anonymousTissueEntityAuthority.setRole(SecurityUtils.AUTHORITY_ENTITY_READ_PREFIX + "tissueexpression".toUpperCase());
-        dataService.add(UserAuthority.ENTITY_NAME, anonymousTissueEntityAuthority);
 
         UserAuthority anonymousDataExplorerAuthority = new UserAuthority();
         anonymousDataExplorerAuthority.setMolgenisUser(anonymousUser);
