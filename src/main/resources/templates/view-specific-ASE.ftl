@@ -34,10 +34,11 @@
 
 <script>
 
-var chrom  = ${entityMap["Chr"]};
-var start = parseInt(${entityMap["Pos"]}, 10) - 10000;
-var stop = parseInt(${entityMap["Pos"]}, 10) + 10000;
-
-createGenomeBrowser({pageName: 'modalGenomeBrowser', noPersist: true, chr: chrom, viewStart: start, viewEnd: stop}) 
+molgenis.dataexplorer.data.createGenomeBrowser({
+	pageName: 'modalGenomeBrowser', 
+	noPersist: true, chr: ${entityMap["Chr"]}, 
+	viewStart: parseInt(${entityMap["Pos"]}, 10) - 10000, 
+	viewEnd: parseInt(${entityMap["Pos"]}, 10) + 10000
+}); 
 	
 </script>
