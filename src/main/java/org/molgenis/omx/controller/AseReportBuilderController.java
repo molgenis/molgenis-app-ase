@@ -35,14 +35,14 @@ public class AseReportBuilderController extends MolgenisPluginController
 	private DataService dataService;
 
 	@RequestMapping(value = URI, method = RequestMethod.GET)
-	public void buildCustomCsvDownload(@RequestParam(value = "entityId") String aseId, HttpServletResponse response)
+	public void buildCustomCsvDownload(@RequestParam(value = "entityId") String snpId, HttpServletResponse response)
 			throws IOException
 	{
 		response.setContentType("text/csv");
-		response.addHeader("Content-Disposition", "attachment; filename=sample_table_aseID" + aseId + ".csv");
+		response.addHeader("Content-Disposition", "attachment; filename=sample_table_" + snpId + ".csv");
 
 		CrudRepository sampleAseRepository = dataService.getCrudRepository("SampleAse");
-		Iterable<Entity> sampleAses = sampleAseRepository.findAll(new QueryImpl().eq("AseId", aseId));
+		Iterable<Entity> sampleAses = sampleAseRepository.findAll(new QueryImpl().eq("SNP_ID", snpId));
 
 		CSVWriter csvWriter = new CSVWriter(new OutputStreamWriter(response.getOutputStream()), '\t',
 				CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.NO_ESCAPE_CHARACTER);
