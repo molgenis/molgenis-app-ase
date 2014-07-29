@@ -1,4 +1,6 @@
 <#assign counter = 0 />
+
+<#-- Table here -->
 <table class="table table-condensed table-striped table-responsive">
 	<tbody>
 		<thead></thead>
@@ -10,35 +12,36 @@
 					<#assign counter = 0>
 				</#if>
 				
-				<#if key != "ID"><th>${key}</th></#if>
-				<#if entityMap[key] != entityId><td>${entityMap[key]}</td></#if>
+				<th>${key}</th>
+				<td>${entityMap[key]}</td>
 				<#assign counter = counter + 1>
 			</#list>
 		</tr>
 	</tbody>
 </table>
 
+<#-- Download button-->
 <button id="csvDownloadButton" data-href="/menu/main/dataexplorer/details/csv">Download ASE sample table</button>
+
+<hr></hr>
+
+<#-- Image here -->
+<div id="AseImage">
+	<#assign link = entityMap["SNP_ID"]?replace(":", "_")>
+	<img src="https://molgenis26.target.rug.nl/downloads/publicRnaSeq/asePlots/png/${link}.png"><img>
+</div>
 
 <hr></hr>
 
 <#-- Genomebrowser here -->
 <div id="modalGenomeBrowser"></div>
 
-<hr></hr>
-
-<div id="AseImage">
-	<#-- Image here, based on naming convention aseimage_<chromosome>_<position>.png-->
-	<img src="http://4.bp.blogspot.com/-72J9scxxz0A/TyNo7iASgXI/AAAAAAAAA1c/bTVs_E14_pM/s1600/Science..jpg"><img>
-</div>
 
 <script>
-
-molgenis.dataexplorer.data.createGenomeBrowser({
-	pageName: 'modalGenomeBrowser', 
-	noPersist: true, chr: ${entityMap["Chr"]}, 
-	viewStart: parseInt(${entityMap["Pos"]}, 10) - 10000, 
-	viewEnd: parseInt(${entityMap["Pos"]}, 10) + 10000
-}); 
-	
+	molgenis.dataexplorer.data.createGenomeBrowser({
+		pageName: 'modalGenomeBrowser', 
+		noPersist: true, chr: ${entityMap["Chr"]}, 
+		viewStart: parseInt(${entityMap["Pos"]}, 10) - 10000, 
+		viewEnd: parseInt(${entityMap["Pos"]}, 10) + 10000
+	}); 
 </script>

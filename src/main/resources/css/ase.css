@@ -1,4 +1,38 @@
 #AseImage {
-	width: 180px;
-	height: 165px;
+	width: auto;
+	height: auto;
+	text-align: center;
+}
+
+#entityReportModal {
+	width: 70%;
+	min-width: 800px;
+	height: 100%;
+	margin-left: -35%;
+	top: -1px;
+	margin-top: 10px;
+}
+
+#entityReportModal .modal-header {
+	height: 40px;
+}
+
+#entityReportModal .modal-body {
+	max-height: none;
+	position: absolute;
+	right: 0;
+	left: 0;
+	top: 60px;
+	bottom: 50px;
+}
+
+#entityReportModal .modal-footer {
+	position: absolute;
+	right: 0;
+	left: 0;
+	bottom: 0;
+}
+
+body.modal-open {
+	overflow: hidden;
 }
