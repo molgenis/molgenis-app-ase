@@ -5,7 +5,7 @@
 	<thead></thead>
 	<tbody>
 		<tr>
-			<#list entityMap?keys as key>
+			<#list entity.getAttributeNames() as key>
 				<#if key != "Genes">
 					<#if counter == 3>
 						</tr>
@@ -14,14 +14,14 @@
 						<#assign counter = 0>
 					</#if>
 				
-					<#if key == "SNP_ID" &&	entityMap[key]?starts_with("rs")>
+					<#if key == "SNP_ID" &&	entity.get(key)?starts_with("rs")>
 						<th>${key}</th>
 						<td>
-							<a target="_blank" href="http://identifiers.org/dbsnp/${entityMap[key]}">${entityMap[key]}</a>
+							<a target="_blank" href="http://identifiers.org/dbsnp/${entity.get(key)}">${entity.get(key)}</a>
 						</td>
 					<#else>
 						<th>${key}</th>
-						<td>${entityMap[key]}</td>
+						<td>${entity.getString(key)}</td>
 					</#if>
 					<#assign counter = counter + 1>
 				</#if>	
@@ -43,14 +43,11 @@
 				<#if attribute == "Ensembl_ID">
 					
 					<td>
-						<a target="_blank" href="http://identifiers.org/ensembl/${gene.get(attribute)}">${gene.get(attribute)}</a>
+						<a target="_blank" href="http://identifiers.org/ensembl/${gene.getString(attribute)}">${gene.getString(attribute)}</a>
 					</td>
 				<#else>
-					<td>${gene.get(attribute)}</td>
-				</#if>
-
-			
-				
+					<td>${gene.getString(attribute)}</td>
+				</#if>	
 			</#list>
 			</tr>
 		</#list>
@@ -64,7 +61,7 @@
 
 <#-- Image here -->
 <div id="AseImage">
-	<#assign link = entityMap["SNP_ID"]?replace(":", "_")>
+	<#assign link = entity.getString("SNP_ID")?replace(":", "_")>
 	<img src="https://molgenis26.target.rug.nl/downloads/publicRnaSeq/asePlots/png/${link}.png"><img>
 </div>
 
@@ -73,12 +70,11 @@
 <#-- Genomebrowser here -->
 <div id="modalGenomeBrowser"></div>
 
-
 <script>
 	molgenis.dataexplorer.data.createGenomeBrowser({
 		pageName: 'modalGenomeBrowser', 
-		noPersist: true, chr: ${entityMap["Chr"]}, 
-		viewStart: parseInt(${entityMap["Pos"]}, 10) - 10000, 
-		viewEnd: parseInt(${entityMap["Pos"]}, 10) + 10000
+		noPersist: true, chr: ${entity.getString("Chr")}, 
+		viewStart: ${entity.getString("Pos")} - 10000, 
+		viewEnd: ${entity.getString("Pos")} + 10000
 	}); 
 </script>
