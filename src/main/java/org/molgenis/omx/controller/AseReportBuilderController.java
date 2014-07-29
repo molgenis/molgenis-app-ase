@@ -44,7 +44,7 @@ public class AseReportBuilderController extends MolgenisPluginController
 		CrudRepository sampleAseRepository = dataService.getCrudRepository("SampleAse");
 		Iterable<Entity> sampleAses = sampleAseRepository.findAll(new QueryImpl().eq("SNP_ID", snpId));
 
-		CSVWriter csvWriter = new CSVWriter(new OutputStreamWriter(response.getOutputStream()), '\t',
+		CSVWriter csvWriter = new CSVWriter(new OutputStreamWriter(response.getOutputStream(), "UTF-8"), '\t',
 				CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.NO_ESCAPE_CHARACTER);
 		csvWriter.writeNext(new String[]
 		{ "Sample_ID", "Ref_Counts", "Alt_Counts", "Tissue", "Cancer", "Secondary_Study_ID", "Gender", "Population" });
