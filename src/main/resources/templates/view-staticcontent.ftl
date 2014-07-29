@@ -33,7 +33,7 @@
 			
 			<hr></hr>	
 			
-			<div class="input-append" id="direct-repository-query-container">
+			<div class="input-append span4" id="direct-repository-query-container">
 				<input class="span4" id="direct-repository-query" type="text" placeholder="Search for ASEs">
 				<button class="btn" type="button" id="direct-repository-query-button"><i class="icon-large icon-search"></i></button>
 			</div>	
