@@ -30,14 +30,18 @@
 		<div class="span12">${content}</div>
 		
 		<div class="row-fluid">
+			
 			<hr></hr>	
-			<div class="input-append span4" id="direct-repository-query-container">
+			
+			<div class="input-append" id="direct-repository-query-container">
 				<input class="span4" id="direct-repository-query" type="text" placeholder="Search for ASEs">
 				<button class="btn" type="button" id="direct-repository-query-button"><i class="icon-large icon-search"></i></button>
 			</div>	
+			
 			<br></br>
-			<span><p>Query the ASE table directly via a Gene identifier(ENSG34928342)</p> 
-			<p>or a chromosome position combination (2:3398223)</p></span>				
+			<p>Query the ASE table directly via a Gene identifier (ENSG00000048707)</p> 
+			<p>or a chromosome position combination (1:12570608)</p>
+							
 		</div>	
 	</div>
 </#if>
