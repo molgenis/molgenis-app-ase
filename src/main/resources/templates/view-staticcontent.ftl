@@ -35,10 +35,6 @@
 			<div class="input-append span4" id="direct-repository-query-container">
 				<input class="span4" id="direct-repository-query" type="text" placeholder="Search for ASEs">
 				<button class="btn" type="button" id="direct-repository-query-button"><i class="icon-large icon-search"></i></button>
-				<label>
-				Query the ASE table directly via a Gene identifier (ENSG00000048707)<br/> 
-				or a chromosome position combination (1:12570608)
-				</label>
 			</div>	
 		</div>
 	</div>
