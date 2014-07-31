@@ -46,20 +46,6 @@
 			</tbody>
 		</table>
 		
-		<#-- Image here -->
-		<div id="AseImage">
-			<#assign link = entity.getString("SNP_ID")?replace(":", "_")>
-			<img src="https://molgenis26.target.rug.nl/downloads/publicRnaSeq/asePlots/png/${link}.png"><img>
-		</div>
-		
-		<hr></hr>
-		
-		<#-- Download buttons -->
-		<p><button data-href="/menu/main/dataexplorer/details/csv">Download ASE sample table</button></p>
-		<p><button data-href="https://molgenis26.target.rug.nl/downloads/publicRnaSeq/asePlots/pdf/${link}.pdf">Download PDF version of ASE graph</button></p>
-		
-		<hr></hr>
-		
 		<#-- GENE TABLE -->
 		<#if entity.getEntities("Genes")?has_content>
 			<table class="table table-condensed table-striped table-responsive">
@@ -87,6 +73,20 @@
 			</table>
 		</#if>
 		
+		<#-- Image here -->
+		<div id="AseImage">
+			<#assign link = entity.getString("SNP_ID")?replace(":", "_")>
+			<img src="https://molgenis26.target.rug.nl/downloads/publicRnaSeq/asePlots/png/${link}.png"><img>
+		</div>
+		
+		<hr></hr>
+		
+		<#-- Download buttons -->
+		<button type="button" class="btn" data-href="/menu/main/dataexplorer/details/csv">Download ASE sample table</button>
+		<button type="button" class="btn" data-href="https://molgenis26.target.rug.nl/downloads/publicRnaSeq/asePlots/pdf/${link}.pdf">Download PDF version of ASE graph</button>
+		
+		<hr></hr>
+		
 		<#-- Genomebrowser here -->
 		<div id="modalGenomeBrowser"></div>
 	</div>
@@ -99,12 +99,14 @@
 
 <script>
 	molgenis.dataexplorer.data.createGenomeBrowser({
-		focus: false,
 		pageName: 'modalGenomeBrowser', 
 		noPersist: true, chr: ${entity.getString("Chr")}, 
 		viewStart: ${entity.getString("Pos")} - 10000, 
-		viewEnd: ${entity.getString("Pos")} + 10000
-	}); 
+		viewEnd: ${entity.getString("Pos")} + 10000,
+		disableDefaultFeaturePopup: true
+	});
 	
-	$(".loc-field").blur();
-</script>
+	setTimeout(function(){
+		$('.modal-body').animate({scrollTop:0},0);
+	}, 10);
+</script>	
