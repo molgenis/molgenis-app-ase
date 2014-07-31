@@ -38,6 +38,14 @@
 			</div>	
 		</div>
 	</div>
+	<script>
+		$("#direct-repository-query-container").keyup(function(event){
+		    if(event.keyCode == 13){
+				$("#direct-repository-query-button").click();
+		    }
+		});
+	</script>
+	
 </#if>
 
 <@footer/>
