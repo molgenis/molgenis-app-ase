@@ -5,10 +5,10 @@
 }
 
 #entityReportModal {
-	width: 70%;
-	min-width: 800px;
+	width: 75%;
+	min-width: 850px;
 	height: 100%;
-	margin-left: -35%;
+	margin-left: -37.5%;
 	top: -1px;
 	margin-top: 10px;
 }
