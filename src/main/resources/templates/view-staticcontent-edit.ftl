@@ -19,7 +19,7 @@
 		</div>
 		<div class="row-fluid">
 			<#if content?has_content>
-		    <textarea id="elm1" name="content" form="contentForm" rows="15">${content} <#if succes?has_content>${succes}</#if></textarea>
+		    <textarea id="elm1" name="content" form="contentForm" rows="15" style="width: 100%;>${content} <#if succes?has_content>${succes}</#if></textarea>
 		    </#if>
 		</div>    
 		</form>
