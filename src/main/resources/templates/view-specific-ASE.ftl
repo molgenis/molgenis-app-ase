@@ -84,7 +84,7 @@ $(document).ready(function(){
 						</tr>
 						
 						<tr id = "${gene.getString("Ensembl_ID")}_fig" style="display: none;">
-							<td colspan = {gene.getAttributeNames()?size} ><img src="https://molgenis26.target.rug.nl/downloads/publicRnaSeq/genePlots/${gene.getString("Ensembl_ID")}.png" alt = "${gene.getString("Ensembl_ID")} expression levels" title = "Expression levels of ${gene.getString("Gene_symbol")} in the 1,262 samples used for the ASE analysis"/></td>
+							<td colspan = ${gene.getAttributeNames()?size} ><img src="https://molgenis26.target.rug.nl/downloads/publicRnaSeq/genePlots/${gene.getString("Ensembl_ID")}.png" alt = "${gene.getString("Ensembl_ID")} expression levels" title = "Expression levels of ${gene.getString("Gene_symbol")} in the 1,262 samples used for the ASE analysis"/></td>
 						</tr>
 						
 						
