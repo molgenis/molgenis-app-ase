@@ -4,6 +4,20 @@
 	<h4 class="modal-title">ASE variant: ${entity.getString("SNP_ID")}</h4>
 </div>
 
+<#noparse>
+<script>
+
+$(document).ready(function(){
+
+    $(".geneRow").click(function(e){
+        e.preventDefault();
+        $('#'+$(this).attr('data-ensg')+'_fig').toggle();
+    });
+});
+
+</script>
+</#noparse>
+
 <#-- modal body -->
 <div class="modal-body">
 	<div class="control-group form-horizontal">		
@@ -56,18 +70,24 @@
 				</thead>
 				<tbody>
 					<#list entity.getEntities("Genes") as gene>
-						<tr>
+						<tr style="cursor:pointer;" class = "geneRow" data-ensg = "${gene.getString("Ensembl_ID")}">
 						<#list gene.getAttributeNames() as attribute>
 							<#if attribute == "Ensembl_ID">
 								
 								<td>
-									<a target="_blank" href="http://identifiers.org/ensembl/${gene.getString(attribute)}">${gene.getString(attribute)}</a>
+									+&nbsp;&nbsp;<a target="_blank" href="http://identifiers.org/ensembl/${gene.getString(attribute)}">${gene.getString(attribute)}</a>
 								</td>
 							<#else>
 								<td>${gene.getString(attribute)}</td>
 							</#if>	
 						</#list>
 						</tr>
+						
+						<tr id = "${gene.getString("Ensembl_ID")}_fig" style="display: none;">
+							<td colspan = {gene.getAttributeNames()?size} ><img src="https://molgenis26.target.rug.nl/downloads/publicRnaSeq/genePlots/${gene.getString("Ensembl_ID")}.png" alt = "${gene.getString("Ensembl_ID")} expression levels" title = "Expression levels of ${gene.getString("Gene_symbol")} in the 1,262 samples used for the ASE analysis"/></td>
+						</tr>
+						
+						
 					</#list>
 				</tbody>
 			</table>
