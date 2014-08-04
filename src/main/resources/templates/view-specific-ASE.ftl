@@ -10,9 +10,13 @@
 $(document).ready(function(){
 
     $(".geneRow").click(function(e){
-        e.preventDefault();
         $('#'+$(this).attr('data-ensg')+'_fig').toggle();
     });
+	
+	$(".geneUrl").click(function(e){
+        e.stopPropagation();
+    });
+	
 });
 
 </script>
@@ -75,7 +79,7 @@ $(document).ready(function(){
 							<#if attribute == "Ensembl_ID">
 								
 								<td>
-									+&nbsp;&nbsp;<a target="_blank" href="http://identifiers.org/ensembl/${gene.getString(attribute)}">${gene.getString(attribute)}</a>
+									+&nbsp;&nbsp;<a target="_blank" href="http://identifiers.org/ensembl/${gene.getString(attribute)}" class="geneUrl">${gene.getString(attribute)}</a>
 								</td>
 							<#else>
 								<td>${gene.getString(attribute)}</td>
