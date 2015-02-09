@@ -1,6 +1,6 @@
-package org.molgenis.omx.controller;
+package org.molgenis.app.controller;
 
-import static org.molgenis.omx.controller.HomeController.URI;
+import static org.molgenis.app.controller.HomeController.URI;
 
 import org.molgenis.framework.ui.MolgenisPluginController;
 import org.molgenis.ui.controller.AbstractStaticContentController;

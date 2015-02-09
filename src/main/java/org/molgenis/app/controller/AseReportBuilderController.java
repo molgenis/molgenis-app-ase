@@ -1,4 +1,4 @@
-package org.molgenis.omx.controller;
+package org.molgenis.app.controller;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;

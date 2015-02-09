@@ -1,9 +1,12 @@
-package org.molgenis.omx;
+package org.molgenis.app;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.molgenis.app.controller.HomeController;
+import org.molgenis.auth.MolgenisUser;
+import org.molgenis.auth.UserAuthority;
 import org.molgenis.data.DataService;
 import org.molgenis.data.annotation.impl.CaddServiceAnnotator;
 import org.molgenis.data.annotation.impl.ClinVarServiceAnnotator;
@@ -14,15 +17,11 @@ import org.molgenis.data.support.GenomeConfig;
 import org.molgenis.data.support.QueryImpl;
 import org.molgenis.dataexplorer.controller.DataExplorerController;
 import org.molgenis.framework.db.WebAppDatabasePopulatorService;
-import org.molgenis.omx.auth.MolgenisUser;
-import org.molgenis.omx.auth.UserAuthority;
-import org.molgenis.omx.controller.HomeController;
-import org.molgenis.omx.core.RuntimeProperty;
 import org.molgenis.security.MolgenisSecurityWebAppDatabasePopulatorService;
 import org.molgenis.security.account.AccountService;
 import org.molgenis.security.core.utils.SecurityUtils;
 import org.molgenis.security.runas.RunAsSystem;
-import org.molgenis.studymanager.StudyManagerController;
+import org.molgenis.system.core.RuntimeProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -111,10 +110,7 @@ public class WebAppDatabasePopulatorServiceImpl implements WebAppDatabasePopulat
 		runtimePropertyMap.put(ClinVarServiceAnnotator.CLINVAR_FILE_LOCATION_PROPERTY,
 				molgenisHomeDirAnnotationResources + "/Clinvar/variant_summary.txt");
 
-		runtimePropertyMap.put(DataExplorerController.WIZARD_TITLE, "Filter Wizard");
-		runtimePropertyMap.put(DataExplorerController.WIZARD_BUTTON_TITLE, "Wizard");
-
-		runtimePropertyMap.put(GenomeConfig.GENOMEBROWSER_START, "POS,start_nucleotide");
+		runtimePropertyMap.put(GenomeConfig.GENOMEBROWSER_POS, "POS,start_nucleotide");
 		runtimePropertyMap.put(GenomeConfig.GENOMEBROWSER_STOP, "stop_pos,stop_nucleotide,end_nucleotide");
 		runtimePropertyMap.put(GenomeConfig.GENOMEBROWSER_CHROM, "CHROM,#CHROM,chromosome");
 		runtimePropertyMap.put(GenomeConfig.GENOMEBROWSER_ID, "ID,Mutation_id");
@@ -139,7 +135,6 @@ public class WebAppDatabasePopulatorServiceImpl implements WebAppDatabasePopulat
         {
             RuntimeProperty runtimeProperty = new RuntimeProperty();
             String propertyKey = entry.getKey();
-            runtimeProperty.setIdentifier(RuntimeProperty.class.getSimpleName() + '_' + propertyKey);
             runtimeProperty.setName(propertyKey);
             runtimeProperty.setValue(entry.getValue());
             dataService.add(RuntimeProperty.ENTITY_NAME, runtimeProperty);
