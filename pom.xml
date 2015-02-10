@@ -7,6 +7,7 @@
 		<version>1.4.0</version>
 	</parent>
 	<artifactId>molgenis-app-ase</artifactId>
+	<version>1.4.0-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<build>
 		<resources>
@@ -112,22 +113,22 @@
 		<dependency>
 			<groupId>org.molgenis</groupId>
 			<artifactId>molgenis-core</artifactId>
-			<version>${project.version}</version>
+			<version>${project.parent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.molgenis</groupId>
 			<artifactId>molgenis-data</artifactId>
-			<version>${project.version}</version>
+			<version>${project.parent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.molgenis</groupId>
 			<artifactId>molgenis-core-ui</artifactId>
-			<version>${project.version}</version>
+			<version>${project.parent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.molgenis</groupId>
 			<artifactId>molgenis-security</artifactId>
-			<version>${project.version}</version>
+			<version>${project.parent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
@@ -142,27 +143,27 @@
 		<dependency>
 			<groupId>org.molgenis</groupId>
 			<artifactId>molgenis-dataexplorer</artifactId>
-			<version>${project.version}</version>
+			<version>${project.parent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.molgenis</groupId>
 			<artifactId>molgenis-data-excel</artifactId>
-			<version>${project.version}</version>
+			<version>${project.parent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.molgenis</groupId>
 			<artifactId>molgenis-data-csv</artifactId>
-			<version>${project.version}</version>
+			<version>${project.parent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.molgenis</groupId>
 			<artifactId>molgenis-disease-matcher</artifactId>
-			<version>${project.version}</version>
+			<version>${project.parent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.molgenis</groupId>
 			<artifactId>molgenis-data-googlespreadsheet</artifactId>
-			<version>${project.version}</version>
+			<version>${project.parent.version}</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>servlet-api</artifactId>
@@ -173,57 +174,57 @@
 		<dependency>
 			<groupId>org.molgenis</groupId>
 			<artifactId>molgenis-data-jpa</artifactId>
-			<version>${project.version}</version>
+			<version>${project.parent.version}</version>
 		</dependency>		
 		<dependency>
 			<groupId>org.molgenis</groupId>
 			<artifactId>molgenis-r</artifactId>
-			<version>${project.version}</version>
+			<version>${project.parent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.molgenis</groupId>
 			<artifactId>molgenis-data-annotators</artifactId>
-			<version>${project.version}</version>
+			<version>${project.parent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.molgenis</groupId>
 			<artifactId>molgenis-charts</artifactId>
-			<version>${project.version}</version>
+			<version>${project.parent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.molgenis</groupId>
 			<artifactId>molgenis-data-rest</artifactId>
-			<version>${project.version}</version>
+			<version>${project.parent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.molgenis</groupId>
 			<artifactId>molgenis-data-merge</artifactId>
-			<version>${project.version}</version>
+			<version>${project.parent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.molgenis</groupId>
 			<artifactId>molgenis-data-vcf</artifactId>
-			<version>${project.version}</version>
+			<version>${project.parent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.molgenis</groupId>
 			<artifactId>molgenis-data-mysql</artifactId>
-			<version>${project.version}</version>
+			<version>${project.parent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.molgenis</groupId>
 			<artifactId>molgenis-data-import</artifactId>
-			<version>${project.version}</version>
+			<version>${project.parent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.molgenis</groupId>
 			<artifactId>molgenis-catalogue</artifactId>
-			<version>${project.version}</version>
+			<version>${project.parent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.molgenis</groupId>
 			<artifactId>molgenis-data-elasticsearch</artifactId>
-			<version>${project.version}</version>
+			<version>${project.parent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -240,12 +241,12 @@
 		<dependency>
 			<groupId>org.molgenis</groupId>
 			<artifactId>molgenis-das</artifactId>
-			<version>${project.version}</version>
+			<version>${project.parent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.molgenis</groupId>
 			<artifactId>molgenis-model-registry</artifactId>
-			<version>${project.version}</version>
+			<version>${project.parent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
@@ -268,7 +269,7 @@
 		<dependency>
 			<groupId>org.molgenis</groupId>
 			<artifactId>molgenis-data-semanticsearch</artifactId>
-			<version>${project.version}</version>
+			<version>${project.parent.version}</version>
 		</dependency>
 	</dependencies>
 </project>
