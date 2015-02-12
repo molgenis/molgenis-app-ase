@@ -33,7 +33,7 @@
 						</goals>
 						<configuration>
 							<files>
-								<file>${user.home}/.molgenis/ase/molgenis-server.properties</file>
+								<file>${user.home}${file.separator}.molgenis${file.separator}ase${file.separator}molgenis-server.properties</file>
 							</files>
 							<quiet>true</quiet>
 						</configuration>
@@ -85,12 +85,9 @@
 			</plugin>
 			<!-- web server -->
 			<plugin>
-                <groupId>org.eclipse.jetty</groupId>
-				<artifactId>jetty-maven-plugin</artifactId>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
 				<configuration>
-                	<stopPort>8079</stopPort>
-                    <stopKey>jetty-stop</stopKey>
-                    <reload>manual</reload>
                     <systemProperties>
 						<systemProperty>
 							<name>molgenis.home</name>
