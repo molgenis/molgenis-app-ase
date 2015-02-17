@@ -100,7 +100,7 @@ $(document).ready(function(){
 		<#-- Image here -->
 		<div id="AseImage">
 			<#assign link = entity.getString("SNP_ID")?replace(":", "_")>
-			<img src="https://molgenis26.target.rug.nl/downloads/publicRnaSeq/asePlots/png/${link}.png" alt = "${entity.getString("SNP_ID")}" width = "800" height = "400" />
+			<img src="/scripts/ASE_Allele_count_plot/run?SNP_ID=rs7377" alt = "${entity.getString("SNP_ID")}" width = "800" height = "400" />
 		</div>
 		
 		<hr></hr>
