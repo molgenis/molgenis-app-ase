@@ -4,9 +4,10 @@
 	<parent>
 		<groupId>org.molgenis</groupId>
 		<artifactId>molgenis</artifactId>
-		<version>1.4.2-SNAPSHOT</version>
+		<version>1.4.1</version>
 	</parent>
 	<artifactId>molgenis-app-ase</artifactId>
+	<version>1.4.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<build>
 		<resources>
@@ -39,22 +40,6 @@
 					</execution>
 				</executions>
 			</plugin>
-			<plugin>
-                <groupId>org.eclipse.jetty</groupId>
-				<artifactId>jetty-maven-plugin</artifactId>
-				<version>9.2.6.v20141205</version>
-				<configuration>
-               	<stopPort>8079</stopPort>
-                    <stopKey>jetty-stop</stopKey>
-                    <reload>manual</reload>
-                    <systemProperties>
-						<systemProperty>
-							<name>molgenis.home</name>
-							<value>${user.home}${file.separator}.molgenis${file.separator}ase</value>
-						</systemProperty>
-					</systemProperties>
-            	</configuration>
-            </plugin>
 			<!-- execute molgenis generator -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
