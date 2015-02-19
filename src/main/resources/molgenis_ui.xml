@@ -2,12 +2,9 @@
 <molgenis label="ASE" name="ase">
 	<menu label="Home" name="main">
 		<plugin id="home" name="Home" url="home"/>
-		<plugin id="ase" name="ASE" url="dataexplorer?entity=ASE"/>
-        <plugin id="samples" name="Samples" url="dataexplorer?entity=Samples"/>
-        <menu label="Import" name ="import">
-			<plugin id="importwizard" name="Import" url="importwizard"/>
-			<plugin id="vcfimporter" name="VCF" url="vcfimporter"/>
-		</menu>
+		<plugin id="dataexplorer" name="ASE" url="dataexplorer?entity=ASE"/>
+        <plugin id="dataexplorer" name="Samples" url="dataexplorer?entity=Samples"/>
+		<plugin id="importwizard" name="Upload" url="importwizard"/>
 		<plugin id="standardsregistry" name="Model registry" url="standardsregistry" />
 		<plugin id="scripts" name="Scripts" url="scripts" />
 		<menu label="Entities" name ="entities">
