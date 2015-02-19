@@ -1,5 +1,8 @@
 package org.molgenis.app;
 
+import static org.molgenis.ui.MolgenisPluginInterceptor.DEFAULT_VAL_FOOTER;
+import static org.molgenis.ui.MolgenisPluginInterceptor.KEY_FOOTER;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -22,6 +25,7 @@ import org.molgenis.security.account.AccountService;
 import org.molgenis.security.core.utils.SecurityUtils;
 import org.molgenis.security.runas.RunAsSystem;
 import org.molgenis.system.core.RuntimeProperty;
+import org.molgenis.ui.MolgenisInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,10 +35,6 @@ public class WebAppDatabasePopulatorServiceImpl implements WebAppDatabasePopulat
 {
 	private final DataService dataService;
 	private final MolgenisSecurityWebAppDatabasePopulatorService molgenisSecurityWebAppDatabasePopulatorService;
-
-    static final String KEY_APP_NAME = "app.name";
-    static final String KEY_APP_HREF_LOGO = "app.href.logo";
-    static final String KEY_APP_HREF_CSS = "app.href.css";
 
 	@Autowired
 	public WebAppDatabasePopulatorServiceImpl(DataService dataService,
@@ -62,20 +62,17 @@ public class WebAppDatabasePopulatorServiceImpl implements WebAppDatabasePopulat
 				"chr:'1',viewStart:10000000,viewEnd:10100000,cookieKey:'human',nopersist:true");
 		runtimePropertyMap.put(DataExplorerController.COORDSYSTEM,
 				"{speciesName: 'Human',taxon: 9606,auth: 'GRCh',version: '37',ucscName: 'hg19'}");
-		runtimePropertyMap
-				.put(DataExplorerController.CHAINS,
-						"{hg18ToHg19: new Chainset('http://www.derkholm.net:8080/das/hg18ToHg19/', 'NCBI36', 'GRCh37',{speciesName: 'Human',taxon: 9606,auth: 'NCBI',version: 36,ucscName: 'hg18'})}");
 		// for use of the demo dataset add to
 		// SOURCES:",{name:'molgenis mutations',uri:'http://localhost:8080/das/molgenis/',desc:'Default from WebAppDatabasePopulatorService'}"
 		runtimePropertyMap
 				.put(DataExplorerController.SOURCES,
-						"[{name:'Genome',twoBitURI:'http://www.biodalliance.org/datasets/hg19.2bit',tier_type: 'sequence'},{name: 'Genes',desc: 'Gene structures from GENCODE 19',bwgURI: 'http://www.biodalliance.org/datasets/gencode.bb',stylesheet_uri: 'http://www.biodalliance.org/stylesheets/gencode.xml',collapseSuperGroups: true,trixURI:'http://www.biodalliance.org/datasets/geneIndex.ix'},{name: 'Repeats',desc: 'Repeat annotation from Ensembl 59',bwgURI: 'http://www.biodalliance.org/datasets/repeats.bb',stylesheet_uri: 'http://www.biodalliance.org/stylesheets/bb-repeats.xml'},{name: 'Conservation',desc: 'Conservation',bwgURI: 'http://www.biodalliance.org/datasets/phastCons46way.bw',noDownsample: true}]");
+						"[{name:'Genome',twoBitURI:'//www.biodalliance.org/datasets/hg19.2bit',tier_type: 'sequence'},{name: 'Genes',desc: 'Gene structures from GENCODE 19',bwgURI: '//www.biodalliance.org/datasets/gencode.bb',stylesheet_uri: '//www.biodalliance.org/stylesheets/gencode.xml',collapseSuperGroups: true,trixURI:'//www.biodalliance.org/datasets/geneIndex.ix'},{name: 'Repeats',desc: 'Repeat annotation from Ensembl 59',bwgURI: '//www.biodalliance.org/datasets/repeats.bb',stylesheet_uri: '//www.biodalliance.org/stylesheets/bb-repeats.xml'},{name: 'Conservation',desc: 'Conservation',bwgURI: '//www.biodalliance.org/datasets/phastCons46way.bw',noDownsample: true}]");
 		runtimePropertyMap
 				.put(DataExplorerController.BROWSERLINKS,
 						"{Ensembl: 'http://www.ensembl.org/Homo_sapiens/Location/View?r=${chr}:${start}-${end}',UCSC: 'http://genome.ucsc.edu/cgi-bin/hgTracks?db=hg19&position=chr${chr}:${start}-${end}',Sequence: 'http://www.derkholm.net:8080/das/hg19comp/sequence?segment=${chr}:${start},${end}'}");
 
 		// include/exclude dataexplorer mods
-		runtimePropertyMap.put(DataExplorerController.KEY_MOD_AGGREGATES, String.valueOf(true));
+		runtimePropertyMap.put(DataExplorerController.KEY_MOD_AGGREGATES, String.valueOf(false));
 		runtimePropertyMap.put(DataExplorerController.KEY_MOD_CHARTS, String.valueOf(true));
 		runtimePropertyMap.put(DataExplorerController.KEY_MOD_DATA, String.valueOf(true));
 		runtimePropertyMap.put(DataExplorerController.KEY_MOD_DISEASEMATCHER, String.valueOf(false));
@@ -84,7 +81,7 @@ public class WebAppDatabasePopulatorServiceImpl implements WebAppDatabasePopulat
 		// DataExplorer table editable yes/no
 		runtimePropertyMap.put(DataExplorerController.KEY_DATAEXPLORER_EDITABLE, String.valueOf(false));
 		runtimePropertyMap.put(DataExplorerController.KEY_GALAXY_ENABLED, String.valueOf(false));
-		
+
 		// DataExplorer rows clickable yes / no
 		runtimePropertyMap.put(DataExplorerController.KEY_DATAEXPLORER_ROW_CLICKABLE, String.valueOf(false));
 
@@ -110,71 +107,78 @@ public class WebAppDatabasePopulatorServiceImpl implements WebAppDatabasePopulat
 		runtimePropertyMap.put(ClinVarServiceAnnotator.CLINVAR_FILE_LOCATION_PROPERTY,
 				molgenisHomeDirAnnotationResources + "/Clinvar/variant_summary.txt");
 
-		runtimePropertyMap.put(GenomeConfig.GENOMEBROWSER_POS, "POS,start_nucleotide");
-		runtimePropertyMap.put(GenomeConfig.GENOMEBROWSER_STOP, "stop_pos,stop_nucleotide,end_nucleotide");
-		runtimePropertyMap.put(GenomeConfig.GENOMEBROWSER_CHROM, "CHROM,#CHROM,chromosome");
+		runtimePropertyMap.put(KEY_FOOTER, DEFAULT_VAL_FOOTER);
+
+		runtimePropertyMap.put(DataExplorerController.KEY_HIDE_SEARCH_BOX, String.valueOf(false));
+		runtimePropertyMap.put(DataExplorerController.KEY_HIDE_ITEM_SELECTION, String.valueOf(false));
+		runtimePropertyMap.put(DataExplorerController.KEY_HEADER_ABBREVIATE,
+				DataExplorerController.DEFAULT_VAL_HEADER_ABBREVIATE);
+		runtimePropertyMap.put(DataExplorerController.KEY_SHOW_WIZARD_ONINIT,
+				String.valueOf(DataExplorerController.DEFAULT_VAL_SHOW_WIZARD_ONINIT));
+		runtimePropertyMap.put(DataExplorerController.AGGREGATES_NORESULTS_MESSAGE,
+				DataExplorerController.DEFAULT_AGGREGATES_NORESULTS_MESSAGE);
+		runtimePropertyMap.put(DataExplorerController.KEY_MOD_AGGREGATES_DISTINCT_HIDE,
+				String.valueOf(DataExplorerController.DEFAULT_VAL_AGGREGATES_DISTINCT_HIDE));
+
+		runtimePropertyMap.put(MolgenisInterceptor.I18N_LOCALE, "en");
+
+		runtimePropertyMap.put(GenomeConfig.GENOMEBROWSER_CHROM, "Chr");
+		runtimePropertyMap.put(GenomeConfig.GENOMEBROWSER_POS, "Pos");
+		runtimePropertyMap.put(GenomeConfig.GENOMEBROWSER_REF, "REF");
+		runtimePropertyMap.put(GenomeConfig.GENOMEBROWSER_ALT, "ALT");
 		runtimePropertyMap.put(GenomeConfig.GENOMEBROWSER_ID, "ID,Mutation_id");
 		runtimePropertyMap.put(GenomeConfig.GENOMEBROWSER_DESCRIPTION, "INFO");
 		runtimePropertyMap.put(GenomeConfig.GENOMEBROWSER_PATIENT_ID, "patient_id");
+		runtimePropertyMap.put(GenomeConfig.GENOMEBROWSER_STOP, "stop_pos,stop_nucleotide,end_nucleotide");
 
-        runtimePropertyMap.put(KEY_APP_NAME, "ASE Browser - MOLGENIS");
-        runtimePropertyMap.put(KEY_APP_HREF_LOGO, "/img/umcg.png");
-        runtimePropertyMap.put(KEY_APP_HREF_CSS, "ase.css");
-        runtimePropertyMap.put(AccountService.KEY_PLUGIN_AUTH_ACTIVATIONMODE, "user");
-        runtimePropertyMap
-                .put("app.home",
-                        "<div class=\"container-fluid\">"
-                                + "<div class=\"row-fluid\">"
-                                + "<div class=\"span6\">"
-                                + "<h3>Welcome</h3>"
-                                + "<p>Placeholder</p>"
-                                + "</div>" + "<div class=\"span6\">"
-                                + "</div>" + "</div>");
+		runtimePropertyMap.put("app.name", "ASE Browser - MOLGENIS");
+		runtimePropertyMap.put(AccountService.KEY_PLUGIN_AUTH_ACTIVATIONMODE, "user");
 
-        for (Entry<String, String> entry : runtimePropertyMap.entrySet())
-        {
-            RuntimeProperty runtimeProperty = new RuntimeProperty();
-            String propertyKey = entry.getKey();
-            runtimeProperty.setName(propertyKey);
-            runtimeProperty.setValue(entry.getValue());
-            dataService.add(RuntimeProperty.ENTITY_NAME, runtimeProperty);
-        }
+		for (Entry<String, String> entry : runtimePropertyMap.entrySet())
+		{
+			RuntimeProperty runtimeProperty = new RuntimeProperty();
+			String propertyKey = entry.getKey();
+			runtimeProperty.setName(propertyKey);
+			runtimeProperty.setValue(entry.getValue());
+			dataService.add(RuntimeProperty.ENTITY_NAME, runtimeProperty);
+		}
 
-        MolgenisUser anonymousUser = molgenisSecurityWebAppDatabasePopulatorService.getAnonymousUser();
+		MolgenisUser anonymousUser = molgenisSecurityWebAppDatabasePopulatorService.getAnonymousUser();
 		UserAuthority anonymousASEAuthority = new UserAuthority();
 		anonymousASEAuthority.setMolgenisUser(anonymousUser);
-        anonymousASEAuthority.setRole(SecurityUtils.AUTHORITY_PLUGIN_WRITE_PREFIX + "ase".toUpperCase());
+		anonymousASEAuthority.setRole(SecurityUtils.AUTHORITY_PLUGIN_WRITE_PREFIX + "ase".toUpperCase());
 		dataService.add(UserAuthority.ENTITY_NAME, anonymousASEAuthority);
 
-        UserAuthority anonymousSamplesAuthority = new UserAuthority();
-        anonymousSamplesAuthority.setMolgenisUser(anonymousUser);
-        anonymousSamplesAuthority.setRole(SecurityUtils.AUTHORITY_PLUGIN_WRITE_PREFIX + "Samples".toUpperCase());
-        dataService.add(UserAuthority.ENTITY_NAME, anonymousSamplesAuthority);
+		UserAuthority anonymousSamplesAuthority = new UserAuthority();
+		anonymousSamplesAuthority.setMolgenisUser(anonymousUser);
+		anonymousSamplesAuthority.setRole(SecurityUtils.AUTHORITY_PLUGIN_WRITE_PREFIX + "Samples".toUpperCase());
+		dataService.add(UserAuthority.ENTITY_NAME, anonymousSamplesAuthority);
 
-        UserAuthority anonymousAseEntityAuthority = new UserAuthority();
-        anonymousAseEntityAuthority.setMolgenisUser(anonymousUser);
-        anonymousAseEntityAuthority.setRole(SecurityUtils.AUTHORITY_ENTITY_READ_PREFIX + "ase".toUpperCase());
-        dataService.add(UserAuthority.ENTITY_NAME, anonymousAseEntityAuthority);
+		UserAuthority anonymousAseEntityAuthority = new UserAuthority();
+		anonymousAseEntityAuthority.setMolgenisUser(anonymousUser);
+		anonymousAseEntityAuthority.setRole(SecurityUtils.AUTHORITY_ENTITY_READ_PREFIX + "ase".toUpperCase());
+		dataService.add(UserAuthority.ENTITY_NAME, anonymousAseEntityAuthority);
 
-        UserAuthority anonymousSamplesEntityAuthority = new UserAuthority();
-        anonymousSamplesEntityAuthority.setMolgenisUser(anonymousUser);
-        anonymousSamplesEntityAuthority.setRole(SecurityUtils.AUTHORITY_ENTITY_READ_PREFIX + "samples".toUpperCase());
-        dataService.add(UserAuthority.ENTITY_NAME, anonymousSamplesEntityAuthority);
+		UserAuthority anonymousSamplesEntityAuthority = new UserAuthority();
+		anonymousSamplesEntityAuthority.setMolgenisUser(anonymousUser);
+		anonymousSamplesEntityAuthority.setRole(SecurityUtils.AUTHORITY_ENTITY_READ_PREFIX + "samples".toUpperCase());
+		dataService.add(UserAuthority.ENTITY_NAME, anonymousSamplesEntityAuthority);
 
-        UserAuthority anonymousDataExplorerAuthority = new UserAuthority();
-        anonymousDataExplorerAuthority.setMolgenisUser(anonymousUser);
-        anonymousDataExplorerAuthority.setRole(SecurityUtils.AUTHORITY_PLUGIN_WRITE_PREFIX + DataExplorerController.ID.toUpperCase());
-        dataService.add(UserAuthority.ENTITY_NAME, anonymousDataExplorerAuthority);
+		UserAuthority anonymousDataExplorerAuthority = new UserAuthority();
+		anonymousDataExplorerAuthority.setMolgenisUser(anonymousUser);
+		anonymousDataExplorerAuthority.setRole(SecurityUtils.AUTHORITY_PLUGIN_WRITE_PREFIX
+				+ DataExplorerController.ID.toUpperCase());
+		dataService.add(UserAuthority.ENTITY_NAME, anonymousDataExplorerAuthority);
 
-        UserAuthority anonymousHomeAuthority = new UserAuthority();
-        anonymousHomeAuthority.setMolgenisUser(anonymousUser);
-        anonymousHomeAuthority.setRole(SecurityUtils.AUTHORITY_PLUGIN_WRITE_PREFIX + HomeController.ID.toUpperCase());
-        dataService.add(UserAuthority.ENTITY_NAME, anonymousHomeAuthority);
+		UserAuthority anonymousHomeAuthority = new UserAuthority();
+		anonymousHomeAuthority.setMolgenisUser(anonymousUser);
+		anonymousHomeAuthority.setRole(SecurityUtils.AUTHORITY_PLUGIN_WRITE_PREFIX + HomeController.ID.toUpperCase());
+		dataService.add(UserAuthority.ENTITY_NAME, anonymousHomeAuthority);
 
-        UserAuthority anonymousRTPAuthority = new UserAuthority();
-        anonymousRTPAuthority.setMolgenisUser(anonymousUser);
-        anonymousRTPAuthority.setRole(SecurityUtils.AUTHORITY_ENTITY_READ_PREFIX + RuntimeProperty.ID.toUpperCase());
-        dataService.add(UserAuthority.ENTITY_NAME, anonymousRTPAuthority);
+		UserAuthority anonymousRTPAuthority = new UserAuthority();
+		anonymousRTPAuthority.setMolgenisUser(anonymousUser);
+		anonymousRTPAuthority.setRole(SecurityUtils.AUTHORITY_ENTITY_READ_PREFIX + RuntimeProperty.ID.toUpperCase());
+		dataService.add(UserAuthority.ENTITY_NAME, anonymousRTPAuthority);
 	}
 
 	@Override
