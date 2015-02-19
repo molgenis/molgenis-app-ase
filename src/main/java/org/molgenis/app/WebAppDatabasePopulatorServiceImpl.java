@@ -83,7 +83,7 @@ public class WebAppDatabasePopulatorServiceImpl implements WebAppDatabasePopulat
 		runtimePropertyMap.put(DataExplorerController.KEY_GALAXY_ENABLED, String.valueOf(false));
 
 		// DataExplorer rows clickable yes / no
-		runtimePropertyMap.put(DataExplorerController.KEY_DATAEXPLORER_ROW_CLICKABLE, String.valueOf(false));
+		runtimePropertyMap.put(DataExplorerController.KEY_DATAEXPLORER_ROW_CLICKABLE, String.valueOf(true));
 
 		// Annotators include files/tools
 		String molgenisHomeDir = System.getProperty("molgenis.home");
@@ -111,8 +111,7 @@ public class WebAppDatabasePopulatorServiceImpl implements WebAppDatabasePopulat
 
 		runtimePropertyMap.put(DataExplorerController.KEY_HIDE_SEARCH_BOX, String.valueOf(false));
 		runtimePropertyMap.put(DataExplorerController.KEY_HIDE_ITEM_SELECTION, String.valueOf(false));
-		runtimePropertyMap.put(DataExplorerController.KEY_HEADER_ABBREVIATE,
-				DataExplorerController.DEFAULT_VAL_HEADER_ABBREVIATE);
+		runtimePropertyMap.put(DataExplorerController.KEY_HEADER_ABBREVIATE, "800");
 		runtimePropertyMap.put(DataExplorerController.KEY_SHOW_WIZARD_ONINIT,
 				String.valueOf(DataExplorerController.DEFAULT_VAL_SHOW_WIZARD_ONINIT));
 		runtimePropertyMap.put(DataExplorerController.AGGREGATES_NORESULTS_MESSAGE,
