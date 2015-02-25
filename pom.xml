@@ -82,24 +82,28 @@
 					</execution>
 				</executions>
 			</plugin>
-			<!-- web server -->
-			<plugin>
-                <groupId>org.eclipse.jetty</groupId>
-				<artifactId>jetty-maven-plugin</artifactId>
-				<version>9.2.6.v20141205</version>
-				<configuration>
-                	<stopPort>8079</stopPort>
-                    <stopKey>jetty-stop</stopKey>
-                    <reload>manual</reload>
-                    <systemProperties>
-						<systemProperty>
-							<name>molgenis.home</name>
-							<value>${user.home}${file.separator}.molgenis${file.separator}ase</value>
-						</systemProperty>
-					</systemProperties>
-            	</configuration>
-            </plugin>
 		</plugins>
+		<!-- web server -->
+		<pluginManagement>
+			<plugins>
+				<plugin>
+                	<groupId>org.eclipse.jetty</groupId>
+					<artifactId>jetty-maven-plugin</artifactId>
+					<version>9.2.6.v20141205</version>
+					<configuration>
+	                	<stopPort>8079</stopPort>
+	                    <stopKey>jetty-stop</stopKey>
+	                    <reload>manual</reload>
+	                    <systemProperties>
+							<systemProperty>
+								<name>molgenis.home</name>
+								<value>${user.home}${file.separator}.molgenis${file.separator}ase</value>
+							</systemProperty>
+						</systemProperties>
+            		</configuration>
+            	</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
 	
 	<dependencies>
