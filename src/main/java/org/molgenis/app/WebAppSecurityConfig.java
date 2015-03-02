@@ -54,7 +54,9 @@ public class WebAppSecurityConfig extends MolgenisWebAppSecurityConfig
 
 				.antMatchers("/annotators/**").authenticated()
 				
-				.antMatchers("/charts/**").authenticated();
+				.antMatchers("/charts/**").authenticated()
+				
+				.antMatchers("/scripts/ASE_plot/run").permitAll();
 	}
 
 	@Override
