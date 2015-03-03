@@ -3,7 +3,6 @@ package org.molgenis.app.controller;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -40,29 +39,31 @@ public class AseReportBuilderController extends MolgenisPluginController
 	{
 		response.setContentType("text/csv");
 		response.addHeader("Content-Disposition", "attachment; filename=sample_table_" + snpId + ".csv");
-
+		
 		CrudRepository sampleAseRepository = dataService.getCrudRepository("SampleAse");
 		Iterable<Entity> sampleAses = sampleAseRepository.findAll(new QueryImpl().eq("SNP_ID", snpId));
 
 		CSVWriter csvWriter = new CSVWriter(new OutputStreamWriter(response.getOutputStream(), "UTF-8"), '\t',
 				CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.NO_ESCAPE_CHARACTER);
+		
 		csvWriter.writeNext(new String[]
 		{ "Sample_ID", "Ref_Counts", "Alt_Counts", "Tissue", "Cancer", "Secondary_Study_ID", "Gender", "Population" });
+		
 		for (Entity sampleAse : sampleAses)
 		{
 			csvWriter.writeNext(getRowForEntity(sampleAse));
 		}
+		
 		csvWriter.close();
 	}
 
 	private String[] getRowForEntity(Entity sampleAse)
 	{
 		List<String> rowValues = new ArrayList<String>();
-		for (String attributeName : Arrays.asList("SampleIds", "Ref_Counts", "Alt_Counts"))
-		{
-			addValueToRow(rowValues, sampleAse.get(attributeName));
-		}
-		Entity sample = (Entity) sampleAse.getEntity("SampleIds");
+		Entity sample = sampleAse.getEntity("SampleIds");
+		addValueToRow(rowValues, sample.get("sample_accession_list"));
+		addValueToRow(rowValues, sampleAse.get("Ref_Counts"));
+		addValueToRow(rowValues, sampleAse.get("Alt_Counts"));
 		addValueToRow(rowValues, sample.get("tissue"));
 		addValueToRow(rowValues, sample.get("cancer"));
 		addValueToRow(rowValues, sample.get("secondary_study_accession"));
