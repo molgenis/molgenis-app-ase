@@ -37,6 +37,11 @@ public class AseReportBuilderController extends MolgenisPluginController
 	public void buildCustomCsvDownload(@RequestParam(value = "entityId") String snpId, HttpServletResponse response)
 			throws IOException
 	{
+		// Unescape the %3A to get the correct entityId
+		if(snpId.contains("%3A")){
+			snpId = snpId.replace("%3A", ":");
+		}
+		
 		response.setContentType("text/csv");
 		response.addHeader("Content-Disposition", "attachment; filename=sample_table_" + snpId + ".csv");
 		
